@@ -17,9 +17,12 @@ ENV DEBIAN_FRONTEND=noninteractive \
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
         aria2 \
+        build-essential \
         ca-certificates \
+        curl \
         ffmpeg \
         git \
+        git-lfs \
         libgl1 \
         libglib2.0-0 \
         libsndfile1 \
