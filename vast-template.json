@@ -1,0 +1,14 @@
+{
+  "name": "Musubi Tuner MiniMax-H3 (Akane CU128)",
+  "description": "MiniMax-H3 Musubi fork with dashboard, Jupyter, SSH, CUDA 12.8 and PyTorch 2.11",
+  "image": "ghcr.io/norian11/musubi-h3-vastai",
+  "tag": "cu128",
+  "launch_mode": "jupyter",
+  "use_jupyter_lab": true,
+  "jupyter_dir": "/workspace",
+  "on_start_script": "env >> /etc/environment\n/usr/local/bin/start-musubi-services",
+  "docker_options": "-p 1111:1111 -p 8080:8080 -p 7860:7860 -e OPEN_BUTTON_PORT=1111 -e OPEN_BUTTON_TOKEN=1 -e JUPYTER_DIR=/workspace -e DATA_DIRECTORY=/workspace -e HF_HOME=/workspace/.cache/huggingface -e HF_HUB_CACHE=/workspace/.cache/huggingface/hub -e HF_XET_CACHE=/workspace/.cache/huggingface/xet -e TORCH_HOME=/workspace/.cache/torch -e PORTAL_CONFIG=\"localhost:1111:11111:/:Instance Portal|localhost:7860:17860:/:Musubi H3 Dashboard|localhost:8080:18080:/:Jupyter|localhost:8080:8080:/terminals/1:Jupyter Terminal\"",
+  "extra_filters": "gpu_ram>=80 compute_cap>=890 cuda_max_good>=12.8 verified=true",
+  "recommended_disk_gb": 250,
+  "visibility": "private"
+}
