@@ -45,17 +45,18 @@ RUN git clone --filter=blob:none --no-checkout "${MUSUBI_REPOSITORY}" "${MUSUBI_
         tensorboard \
     && git rev-parse HEAD > /opt/musubi-version.txt
 
-COPY scripts/start-services.sh /usr/local/bin/start-musubi-services
 COPY scripts/verify-install.py /usr/local/lib/musubi/verify-install.py
 COPY scripts/workspace-layout.sh /usr/local/lib/musubi/workspace-layout.sh
+COPY ROOT /
 
 RUN chmod 0755 \
-        /usr/local/bin/start-musubi-services \
         /usr/local/lib/musubi/workspace-layout.sh \
+        /opt/supervisor-scripts/musubi-dashboard.sh \
     && /venv/main/bin/python /usr/local/lib/musubi/verify-install.py --build
 
 WORKDIR /workspace
 
-# Vast's Jupyter/SSH launch modes replace the image entrypoint. The template's
-# on-start command invokes start-musubi-services after Vast finishes its setup.
-CMD ["bash"]
+# Vast's Jupyter/SSH launch modes replace this entrypoint, so the template calls
+# entrypoint.sh from its on-start field, exactly like Vast's official images.
+ENTRYPOINT ["/opt/instance-tools/bin/entrypoint.sh"]
+CMD []

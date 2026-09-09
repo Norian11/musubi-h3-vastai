@@ -44,7 +44,7 @@ belong under `/workspace`, which is the persistent storage location on Vast.ai.
    with GHCR authentication for a private package.
 5. The image will be:
 
-   `ghcr.io/norian11/musubi-h3-vastai:cu128`
+  `ghcr.io/norian11/musubi-h3-vastai:cu128-portal-v2`
 
 ## Vast.ai fields
 
@@ -57,16 +57,16 @@ choices:
 - On-start script:
 
   ```bash
-  env >> /etc/environment
-  /usr/local/bin/start-musubi-services
+  entrypoint.sh
   ```
 
 - Recommended disk: 250 GB, adjusted upward for your datasets and caches
 - Keep the template private until it has been tested
 
-The dashboard binds to `127.0.0.1:17860`. Vast's authenticated portal proxies
-external port 7860 to it. Do not start the dashboard on `0.0.0.0:7860`; it can
-launch arbitrary training processes with root's permissions.
+The dashboard is a Supervisor-managed service bound to `127.0.0.1:17860`.
+Vast's authenticated portal proxies external port 7860 to it. Do not start the
+dashboard on `0.0.0.0:7860`; it can launch arbitrary training processes with
+root's permissions.
 
 ## First-instance verification
 

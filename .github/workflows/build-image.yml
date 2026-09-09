@@ -41,6 +41,7 @@ jobs:
           images: ghcr.io/${{ github.repository_owner }}/musubi-h3-vastai
           tags: |
             type=raw,value=cu128
+            type=raw,value=cu128-portal-v2
             type=sha,prefix=cu128-
 
       - uses: docker/build-push-action@v6
